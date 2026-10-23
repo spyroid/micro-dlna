@@ -11,7 +11,8 @@ Requires macOS 13 or later. Supports Apple silicon and Intel Macs.
 2. Open it and drag **microDLNA.app** into **Applications**.
 3. Launch μDLNA server. A TV icon appears in the menu bar, next to the clock.
 
-The app is not notarized by Apple, so macOS may warn or block it on first launch.
+Starting with version 1.0.1, official releases are signed with Developer ID and
+notarized by Apple.
 
 ## Watch your media
 

@@ -21,6 +21,7 @@ open .build/microDLNA.app --args "$HOME/Movies" 192.168.1.20
 
 ```sh
 Tests/BrowseRegression/run.sh
+python3 Tests/ReleaseRegression/run.py
 .build/microDLNA.app/Contents/MacOS/microdlna --self-test
 ```
 
@@ -50,5 +51,35 @@ Mac, restore the same key rather than generating a replacement: installed copies
 trust the public key embedded in `App/Info.plist`.
 
 Do not edit `appcast.xml` after signing; regenerate it with Sparkle's tools.
-Builds are ad-hoc signed without Apple notarization. Sparkle's license and the
-project's [LICENSE](LICENSE) are bundled in the application.
+Without signing settings, builds use an ad-hoc signature and are not notarized.
+Sparkle's license and the project's [LICENSE](LICENSE) are bundled in the app.
+
+## Developer ID and notarization
+
+Install a **Developer ID Application** certificate with its private key in your
+login Keychain. List available identities with `security find-identity -v -p codesigning`.
+
+Create an app-specific password at [Apple Account](https://account.apple.com/)
+and save notarization credentials once (the password is entered at a secure prompt):
+
+```sh
+xcrun notarytool store-credentials microdlna-notary --apple-id "YOUR_APPLE_ID" --team-id "YOUR_TEAM_ID"
+```
+
+Then build a release using your certificate's full name:
+
+```sh
+export SIGNING_IDENTITY="Developer ID Application: YOUR_NAME (YOUR_TEAM_ID)"
+export NOTARY_PROFILE=microdlna-notary
+./build-release.sh
+```
+
+The scripts sign the app and Sparkle helpers with the hardened runtime, notarize
+and staple the app, package and sign the DMG, notarize and staple the DMG, then
+sign the finished archive and appcast with Sparkle. Rejected submissions stop the
+release; reports remain in `.build/notarization/`. Do not change the DMG after
+generating the appcast, since its signature covers the final bytes.
+
+`SIGNING_IDENTITY` alone can be used with `build-app.sh` or `build-dmg.sh` to test
+signing without notarization. `build-release.sh` requires both settings for a
+Developer ID release. Keep passwords and private keys out of the repository.
