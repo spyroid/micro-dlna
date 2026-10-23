@@ -1,0 +1,26 @@
+μDLNA server Custom License 1.0
+
+Copyright (c) 2026 spyroid
+
+Permission is granted to use, copy, and modify this software and its accompanying
+source code and documentation (the "Software") for any purpose, including use
+within a business, subject to the following conditions:
+
+1. You may redistribute the Software, including modified versions, only free of
+   charge. You may not sell copies, charge a download or access fee for copies,
+   or otherwise make payment a condition of receiving a copy. Paid redistribution
+   requires separate written permission from the copyright holder.
+
+2. Every redistributed copy or modified version must retain this copyright
+   notice, this license, and the restriction on paid redistribution. Modified
+   versions must be identified as modified and must not be represented as an
+   official release by the original author.
+
+3. This license applies only to μDLNA server. Third-party components remain covered
+   by their own licenses, which must be preserved and respected.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED. TO THE EXTENT PERMITTED BY LAW, THE COPYRIGHT HOLDERS ARE NOT LIABLE
+FOR CLAIMS, DAMAGES, OR OTHER LIABILITY ARISING FROM THE SOFTWARE OR ITS USE.
+
+This is a custom source-available license, not an OSI-approved open-source license.

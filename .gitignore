@@ -60,3 +60,12 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+
+.swiftpm/
+
+.DS_Store
+
+/microdlna
+
+.idea/
+/.index-build/
