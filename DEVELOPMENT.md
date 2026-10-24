@@ -21,7 +21,7 @@ open .build/microDLNA.app --args "$HOME/Movies" 192.168.1.20
 
 ```sh
 Tests/BrowseRegression/run.sh
-python3 Tests/ReleaseRegression/run.py
+Tests/ReleaseRegression/run.sh
 .build/microDLNA.app/Contents/MacOS/microdlna --self-test
 ```
 
