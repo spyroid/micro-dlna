@@ -19,7 +19,7 @@ notarized by Apple.
 1. Put your media in your Mac's **Movies** folder (`~/Movies`). Nested folders work too.
 2. Allow access to your media and local network if macOS asks.
 3. Connect your Mac and player to the same local network.
-4. Open the player's UPnP/DLNA browser and select **μDLNA server**.
+4. Open the player's UPnP/DLNA browser and select **μDLNA server — your Mac's name**.
    In VLC, look under **Local Network → Universal Plug'n'Play**.
 
 Keep the app running while watching. Restart it after adding, moving, or deleting

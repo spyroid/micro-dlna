@@ -56,6 +56,21 @@ func value(_ document: XMLDocument, _ name: String) throws -> String {
     return nodes.first?.stringValue ?? ""
 }
 
+// Computer names may contain Unicode or XML characters; missing names keep the base title.
+for (computerName, expected) in [
+    (nil, "μDLNA server"),
+    ("", "μDLNA server"),
+    (" \n ", "μDLNA server"),
+    ("  Мак & <Media> \"Studio\"  ", "μDLNA server — Мак & <Media> \"Studio\""),
+] as [(String?, String)] {
+    let namedDevice = UPnPDevice(library: library, computerName: computerName)
+    let description = try XMLDocument(xmlString: namedDevice.description)
+    check(try value(description, "friendlyName") == expected)
+}
+let localName = Host.current().localizedName?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+let expectedName = localName.isEmpty ? "μDLNA server" : "μDLNA server — \(localName)"
+check(try value(XMLDocument(xmlString: device.description), "friendlyName") == expectedName)
+
 let arguments = """
     <ObjectID>0</ObjectID>
     <BrowseFlag>BrowseDirectChildren</BrowseFlag>
@@ -212,5 +227,5 @@ check(try value(fileChildren.document, "errorCode") == "710")
 let unknownObject = try folderBrowse("99999")
 check(try value(unknownObject.document, "errorCode") == "701")
 print(
-    "Browse regression checks passed: media classes, thumbnails, SOAP formatting, folders, pagination, and symlink boundaries"
+    "Browse regression checks passed: server names, media classes, thumbnails, SOAP formatting, folders, pagination, and symlink boundaries"
 )

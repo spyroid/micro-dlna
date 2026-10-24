@@ -161,7 +161,14 @@ func serviceDescription(_ actions: [ServiceAction]) -> String {
 struct UPnPDevice {
     let library: MediaLibrary
     let uuid = "uuid:" + UUID().uuidString.lowercased()
+    let friendlyName: String
     var base: String { library.base }
+
+    init(library: MediaLibrary, computerName: String? = Host.current().localizedName) {
+        self.library = library
+        let name = computerName?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        friendlyName = name.isEmpty ? "μDLNA" : "μDLNA on \(name)"
+    }
 
     var description: String {
         let services = [
@@ -186,7 +193,7 @@ struct UPnPDevice {
             <specVersion><major>1</major><minor>0</minor></specVersion>\
             <device>\
             <deviceType>\(deviceType)</deviceType>\
-            <friendlyName>μDLNA server</friendlyName>\
+            <friendlyName>\(escapeXML(friendlyName))</friendlyName>\
             <manufacturer>Local</manufacturer>\
             <modelName>μDLNA server</modelName>\
             <UDN>\(uuid)</UDN>\
