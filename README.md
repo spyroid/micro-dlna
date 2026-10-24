@@ -52,10 +52,15 @@ open /Applications/microDLNA.app --args "$HOME/Videos"
 
 ## Menu and updates
 
-Click the TV icon for **About**, **Check for Updates…**, or **Quit**.
+Click the TV icon for **About**, **Support Development…**, **Check for Updates…**, or **Quit**.
 The second menu row shows your media folder; click it to open the folder in Finder.
 Long paths are shortened in the menu; hover over the row to see the full path.
 Updates are checked automatically and can be installed when you quit the app.
+
+## Support development
+
+Enjoy μDLNA server? [Support development on Ko-fi](https://ko-fi.com/spyroid).
+You can also find this link in the app menu and About window.
 
 ## License and development
 

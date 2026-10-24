@@ -7,6 +7,7 @@ import AppKit
 final class ApplicationDelegate: NSObject, NSApplicationDelegate {
     private let mediaDirectory: URL
     private let requestedIP: String?
+    private let supportURL = URL(string: "https://ko-fi.com/spyroid")!
     private var statusItem: NSStatusItem?
     #if canImport(Sparkle)
         private var updaterController: SPUStandardUpdaterController?
@@ -43,6 +44,10 @@ final class ApplicationDelegate: NSObject, NSApplicationDelegate {
             title: "About", action: #selector(showAbout(_:)), keyEquivalent: "")
         aboutItem.target = self
         menu.addItem(aboutItem)
+        let supportItem = NSMenuItem(
+            title: "Support Development…", action: #selector(openSupportPage(_:)), keyEquivalent: "")
+        supportItem.target = self
+        menu.addItem(supportItem)
         #if canImport(Sparkle)
             // Local builds without a configured feed must not contact an update server.
             if Bundle.main.object(forInfoDictionaryKey: "SUFeedURL") is String,
@@ -113,9 +118,17 @@ final class ApplicationDelegate: NSObject, NSApplicationDelegate {
         NSWorkspace.shared.open(mediaDirectory)
     }
 
+    @objc private func openSupportPage(_ sender: Any?) {
+        NSWorkspace.shared.open(supportURL)
+    }
+
     @objc private func showAbout(_ sender: Any?) {
         // Use Greek mu in the About panel while keeping file and executable names ASCII.
         NSApp.activate(ignoringOtherApps: true)
-        NSApp.orderFrontStandardAboutPanel(options: [.applicationName: "μDLNA server"])
+        let credits = NSAttributedString(
+            string: "Support development on Ko-fi", attributes: [.link: supportURL])
+        NSApp.orderFrontStandardAboutPanel(options: [
+            .applicationName: "μDLNA server", .credits: credits
+        ])
     }
 }
